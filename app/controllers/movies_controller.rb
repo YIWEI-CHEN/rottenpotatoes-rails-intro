@@ -18,7 +18,8 @@ class MoviesController < ApplicationController
     @checked_ratings = params[:ratings] || session[:ratings] \
       || Hash[@all_ratings.map { |r| [r, 1] }]
     
-    if !params[:commit].nil? || params[:ratings].nil? || (params[:sort].nil? && !session[:sort].nil?)
+    if !params[:commit].nil? || params[:ratings].nil? || \
+      (params[:sort].nil? && !session[:sort].nil?)
       flash.keep
       redirect_to movies_path :sort => sort, :ratings => @checked_ratings
     end
