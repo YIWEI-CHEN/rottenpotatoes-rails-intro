@@ -1,8 +1,8 @@
 class Movie < ActiveRecord::Base
     def self.all_ratings
-        Movie.pluck(:rating).uniq
+        pluck(:rating).uniq
     end
     def self.with_ratings(ratings)
-        Movie.where(rating: ratings)
+        where("LOWER(rating) IN (?)", ratings.map(&:downcase))
     end
 end
